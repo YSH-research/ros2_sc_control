@@ -37,6 +37,8 @@
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
+    <build_type>ament_cmake</build_type>
+    <member_of_group>rosidl_interface_packages</member_of_group>
     <!-- Other tools can request additional information be placed here -->
 
   </export>
