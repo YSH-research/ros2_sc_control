@@ -53,6 +53,15 @@ rosidl_target_interfaces(${PROJECT_NAME} ${PROJECT_NAME} "rosidl_typesupport_cpp
 
 # target_link_libraries(sc_control  ${catkin_LIBRARIES})
 
-ament_target_dependencies(${PROJECT_NAME})
+ament_target_dependencies(${PROJECT_NAME}
+  rclcpp
+  sensor_msgs
+  std_msgs
+  serial
+  tf2
+  nav_msgs
+  geometry_msgs
+  visualization_msgs
+)
 
 ament_package()
