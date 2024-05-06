@@ -1,5 +1,5 @@
 #include <string.h>
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 #include <serial/serial.h>
 #include <std_msgs/Int16.h>
 #include <std_msgs/Int8.h>
@@ -32,13 +32,13 @@ class SC_Serial
         BYTE input[14];
         int HexStringToDec(char A, char B);
 
-        ros::NodeHandle node_;
-        ros::Publisher pubAorM;
-        ros::Publisher pubEstop;
-        ros::Publisher pubGear;
-        ros::Publisher pubVel;
-        ros::Publisher pubSteer;
-        ros::Publisher pubBreak;
-        ros::Publisher pubEnc;
+        rclcpp::NodeHandle node_;
+        rclcpp::Publisher pubAorM;
+        rclcpp::Publisher pubEstop;
+        rclcpp::Publisher pubGear;
+        rclcpp::Publisher pubVel;
+        rclcpp::Publisher pubSteer;
+        rclcpp::Publisher pubBreak;
+        rclcpp::Publisher pubEnc;
 };
 
