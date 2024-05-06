@@ -54,5 +54,5 @@ src/sc_serial.cpp
 
 target_link_libraries(SC_Control  ${catkin_LIBRARIES})
 
-
+ament_target_dependencies(target serial)
 ament_package()
