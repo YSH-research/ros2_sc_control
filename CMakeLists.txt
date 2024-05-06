@@ -49,7 +49,11 @@ src/main.cpp
 src/sc_serial.cpp
 )
 
-rosidl_target_interfaces(${PROJECT_NAME} ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_target_interfaces(
+  ${PROJECT_NAME} 
+  ${PROJECT_NAME} 
+  "rosidl_typesupport_cpp"
+  )
 
 # target_link_libraries(sc_control  ${catkin_LIBRARIES})
 
