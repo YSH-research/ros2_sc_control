@@ -17,6 +17,7 @@
   <build_depend>geometry_msgs</build_depend>
   <build_depend>visualization_msgs</build_depend>
   <build_depend>rosidl_default_generators</build_depend>
+  <build_depend>rosidl_default_runtime</build_depend>
 
   <build_export_depend>rclcpp</build_export_depend>
   <build_export_depend>serial</build_export_depend>
@@ -27,6 +28,7 @@
   <build_export_depend>geometry_msgs</build_export_depend>
   <build_export_depend>visualization_msgs</build_export_depend>
   <build_export_depend>rosidl_default_generators</build_export_depend>
+  <build_export_depend>rosidl_default_runtime</build_export_depend>
 
   <exec_depend>rclcpp</exec_depend>
   <exec_depend>serial</exec_depend>
@@ -37,11 +39,14 @@
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>visualization_msgs</exec_depend>
   <exec_depend>rosidl_default_generators</exec_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend> 
+
+  <build_type>ament_cmake</build_type>
+  <member_of_group>rosidl_interface_packages</member_of_group>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <build_type>ament_cmake</build_type>
-    <member_of_group>rosidl_interface_packages</member_of_group>
+   
     <!-- Other tools can request additional information be placed here -->
 
   </export>
