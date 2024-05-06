@@ -1,23 +1,20 @@
 cmake_minimum_required(VERSION 3.5)
 project(SC_Control)
 
-
-add_compile_options(-std=c++11)
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
 endif()
+#add_compile_options(-std=c++11)
 
-
-find_package(catkin REQUIRED COMPONENTS
-  rclcpp
-  sensor_msgs
-  std_msgs
-  serial
-  tf2
-  nav_msgs
-  geometry_msgs
-  visualization_msgs
-)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(serial REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 
 add_message_files(
   FILES
@@ -57,9 +54,5 @@ src/sc_serial.cpp
 
 target_link_libraries(SC_Control  ${catkin_LIBRARIES})
 
-install(TARGETS
-  ${PROJECT_NAME}
-  DESTINATION lib/${PROJECT_NAME}
-)
 
 ament_package()
