@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="SC_Control" name="sc_control" type="SC_Control" output="screen"/>
+        <param name="port_name" value="/dev/ttyUSB0"    type="string"/>
+        <param name="baud_rate" value="115200"  type="int"/>
+</launch>
