@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(SC_Control)
+project(sc_control)
 
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
@@ -52,7 +52,7 @@ src/main.cpp
 src/sc_serial.cpp
 )
 
-target_link_libraries(SC_Control  ${catkin_LIBRARIES})
+target_link_libraries(sc_control  ${catkin_LIBRARIES})
 
 ament_target_dependencies(target serial)
 ament_package()
