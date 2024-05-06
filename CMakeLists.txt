@@ -44,7 +44,7 @@ file(GLOB_RECURSE project_HEADERS
 )
 
 add_executable(
-${PROJECT_NAME}# ${project_HEADERS}
+${PROJECT_NAME}_node ${project_HEADERS}
 src/main.cpp 
 src/sc_serial.cpp
 )
@@ -57,15 +57,14 @@ rosidl_target_interfaces(
 
 # target_link_libraries(sc_control  ${catkin_LIBRARIES})
 
-ament_target_dependencies(${PROJECT_NAME}
-  rclcpp
-  sensor_msgs
-  std_msgs
-  serial
-  tf2
-  nav_msgs
-  geometry_msgs
-  visualization_msgs
-)
+#ament_target_dependencies(${PROJECT_NAME})
 
-ament_package()
+ament_package() 
+ # rclcpp
+  # sensor_msgs
+  # std_msgs
+  # serial
+  # tf2
+  # nav_msgs
+  # geometry_msgs
+  # visualization_msgs
