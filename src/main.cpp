@@ -1,4 +1,4 @@
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.h>
 #include <std_msgs/String.h>
 #include <iostream>
 #include <vector>
@@ -14,7 +14,7 @@
 #include <sensor_msgs/Joy.h>
 
 using namespace std;
-using namespace ros;
+using namespace rclcpp;
 
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -40,10 +40,10 @@ int pid_out = 0;
 int steering_out = 0;
 short break_value;
 short gear_value;
-ros::Time current_time;
-ros::Time prev_time;
-ros::Time cmd_vel_time;
-ros::Time cal_time;
+rclcpp::Time current_time;
+rclcpp::Time prev_time;
+rclcpp::Time cmd_vel_time;
+rclcpp::Time cal_time;
 float prev_angular = 0;
 
 geometry_msgs::Twist cmd_vel;
@@ -153,12 +153,12 @@ void joyCallback(const sensor_msgs::Joy joyMsg)
 int main(int argc, char **argv)
 {
 
-    ros::init(argc, argv, "Controller_data");
-    ros::NodeHandle node_;
-    ros::NodeHandle pnh("~");
+    rclcpp::init(argc, argv, "Controller_data");
+    rclcpp::NodeHandle node_;
+    rclcpp::NodeHandle pnh("~");
 
-    ros::Subscriber joy_subs = node_.subscribe("/joy", 1, joyCallback);
-    ros::Subscriber cmd_subs = node_.subscribe("/cmd_vel", 1, cmdCallback);
+    rclcpp::Subscriber joy_subs = node_.subscribe("/joy", 1, joyCallback);
+    rclcpp::Subscriber cmd_subs = node_.subscribe("/cmd_vel", 1, cmdCallback);
 
     std::string port_name;
     int baud_rate;
@@ -178,20 +178,20 @@ int main(int argc, char **argv)
     break_value = 1;
     gear_value = 0;
 
-    current_time = ros::Time::now();
-    prev_time = ros::Time::now();
+    current_time = rclcpp::Time::now();
+    prev_time = rclcpp::Time::now();
 
-    ros::Rate r(70.0); //50hz
+    rclcpp::Rate r(70.0); //50hz
     while (node_.ok())
     {
-        current_time = ros::Time::now();
+        current_time = rclcpp::Time::now();
         SCS.SerialProcessing(pid_out, steering_out, break_value, gear_value); // send data
         CalculateVelocity(SCS.Rx_Enc);
 
         LinarVelocityPid(cmd_vel.linear.x, SCS.Rx_Vel.data); // enc_based_vel
         SteeringPid(cmd_vel.angular.z);
 
-        ros::spinOnce();
+        rclcpp::spinOnce();
         r.sleep();
     }
     return 0;
