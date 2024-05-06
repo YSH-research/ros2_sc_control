@@ -16,29 +16,25 @@ find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 
-add_message_files(
-  FILES
-  selfcar_cmd.msg
-
-)
-
-generate_messages(
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/selfcar_cmd.msg"
   DEPENDENCIES
   std_msgs
-    # Or other packages containing msgs
 )
+# add_message_files(FILESselfcar_cmd.msg)
 
-catkin_package(
-    INCLUDE_DIRS include
-#  LIBRARIES targetless
-#    CATKIN_DEPENDS
-#  DEPENDS system_lib
-)
+
+# catkin_package(
+#     INCLUDE_DIRS include
+# #  LIBRARIES targetless
+# #    CATKIN_DEPENDS
+# #  DEPENDS system_lib
+# )
+
+
 
 include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+#include_directories( ${catkin_INCLUDE_DIRS})
 
 file(GLOB_RECURSE project_HEADERS
     "*.h"
@@ -52,7 +48,10 @@ src/main.cpp
 src/sc_serial.cpp
 )
 
-target_link_libraries(sc_control  ${catkin_LIBRARIES})
+rosidl_target_interfaces(${PROJECT_NAME} ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
-ament_target_dependencies(target serial)
+# target_link_libraries(sc_control  ${catkin_LIBRARIES})
+
+ament_target_dependencies(${PROJECT_NAME})
+
 ament_package()
