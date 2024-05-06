@@ -44,8 +44,7 @@ file(GLOB_RECURSE project_HEADERS
 )
 
 add_executable(
-${PROJECT_NAME}
-${project_HEADERS}
+${PROJECT_NAME}# ${project_HEADERS}
 src/main.cpp 
 src/sc_serial.cpp
 )
