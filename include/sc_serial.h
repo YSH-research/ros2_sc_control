@@ -1,10 +1,10 @@
 #include <string.h>
 #include <rclcpp/rclcpp.hpp>
 #include <serial/serial.h>
-#include <std_msgs/msg/Int16.hpp>
-#include <std_msgs/msg/Int8.hpp>
-#include <std_msgs/msg/Int32.hpp>
-#include <std_msgs/msg/string.hpp>
+#include <std_msgs/Int16.h>
+#include <std_msgs/Int8.h>
+#include <std_msgs/Int32.h>
+#include <std_msgs/String.h>
 #include <nav_msgs/Odometry.h>
 typedef char BYTE;
 
