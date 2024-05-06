@@ -1,6 +1,6 @@
 #include "sc_serial.h"
 
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 #include <std_msgs/String.h>
 #include <std_msgs/Empty.h>
 
@@ -30,13 +30,13 @@ bool connect(std::string port_name, int baudrate)
         serial::Timeout to = serial::Timeout::simpleTimeout(1000);
         ser.setTimeout(to);
         ser.open();
-        ROS_INFO("open port ");
+        RCLCPP_INFO("open port ");
         return true;
     }
     catch (serial::IOException &e)
     {
-        ROS_INFO("CAN'T OPEN PORT ");
-        ros::shutdown();
+        RCLCPP_INFO("CAN'T OPEN PORT ");
+        rclcpp::shutdown();
         return false;
     }
 }
@@ -111,24 +111,24 @@ void SC_Serial::ReceiveData(std::string str)
     if (str[0] == 'S')
     {
         uint8_t AorM = (uint8_t)str.c_str()[3];
-        ROS_INFO("ERP MODE (M/A) : %d, %X(HEX)", AorM, AorM);
+        RCLCPP_INFO("ERP MODE (M/A) : %d, %X(HEX)", AorM, AorM);
         uint8_t estop = (uint8_t)str.c_str()[4];
-        ROS_INFO("ERP ESTOP (OFF/ON) : %d, %X(HEX)", estop ,estop);
+        RCLCPP_INFO("ERP ESTOP (OFF/ON) : %d, %X(HEX)", estop ,estop);
         uint8_t gear = (uint8_t)str.c_str()[5];
-        ROS_INFO("ERP GEAR (F/N/B) : %d %X(HEX)", gear, gear);
+        RCLCPP_INFO("ERP GEAR (F/N/B) : %d %X(HEX)", gear, gear);
 
         uint16_t vel = (uint8_t)str.c_str()[6] | (uint8_t)str.c_str()[7] << 8;
-        ROS_INFO("ERP VEL (km/h * 10) : %d %X %X(HEX)", vel, (uint8_t)str.c_str()[6], (uint8_t)str.c_str()[7]);
+        RCLCPP_INFO("ERP VEL (km/h * 10) : %d %X %X(HEX)", vel, (uint8_t)str.c_str()[6], (uint8_t)str.c_str()[7]);
 
         int16_t steer = (uint8_t)str.c_str()[8] | (uint8_t)str.c_str()[9] << 8;
-        ROS_INFO("ERP STEER : %d %X %X(HEX)", steer, (uint8_t)str.c_str()[8], (uint8_t)str.c_str()[9]);
+        RCLCPP_INFO("ERP STEER : %d %X %X(HEX)", steer, (uint8_t)str.c_str()[8], (uint8_t)str.c_str()[9]);
 
         uint8_t brk = (uint8_t)str.c_str()[10];
-        ROS_INFO("ERP BREAK : %d, %X(HEX)", brk, brk);
+        RCLCPP_INFO("ERP BREAK : %d, %X(HEX)", brk, brk);
 
         int32_t enc = (uint8_t)str.c_str()[11] | (uint8_t)str.c_str()[12] << 8 |
                        (uint8_t)str.c_str()[13] << 16 | (uint8_t)str.c_str()[14] << 24;
-        ROS_INFO("ERP ENC : %d, %X %X %X %X(HEX)", enc,
+        RCLCPP_INFO("ERP ENC : %d, %X %X %X %X(HEX)", enc,
                  (uint8_t)str.c_str()[11], (uint8_t)str.c_str()[12], (uint8_t)str.c_str()[13], (uint8_t)str.c_str()[14]);
 
         Rx_AorM.data = AorM;
@@ -152,7 +152,7 @@ void SC_Serial::ReceiveData(std::string str)
 void SC_Serial::SerialProcessing(short Tx_Vel, short Tx_Steer, short Tx_break, short Tx_gear)
 {
     string result1;
-    //    ros::spinOnce();
+    //    rclcpp::spinOnce();
 
     if (ser.available())
     {
@@ -166,7 +166,7 @@ void SC_Serial::SerialProcessing(short Tx_Vel, short Tx_Steer, short Tx_break, s
         ser.readline(result1);
         ReceiveData(result1);
     } //else
-      // ROS_INFO("NO SERIAL DATA ");
+      // rclcpp_INFO("NO SERIAL DATA ");
 }
 int SC_Serial::HexStringToDec(char A, char B)
 {
